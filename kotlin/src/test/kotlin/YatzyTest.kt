@@ -13,11 +13,10 @@ class YatzyTest {
 
     @Test
     fun yatzy_scores_50() {
-        val expected = 50
-        val actual = Yatzy.yatzy(4, 4, 4, 4, 4)
-        assertEquals(expected, actual)
-        assertEquals(50, Yatzy.yatzy(6, 6, 6, 6, 6))
-        assertEquals(0, Yatzy.yatzy(6, 6, 6, 6, 3))
+        assertEquals(0, Yatzy(6, 6, 6, 6, 1).yatzy())
+        assertEquals(50, Yatzy(1, 1, 1, 1, 1).yatzy())
+        assertEquals(50, Yatzy(4, 4, 4, 4, 4).yatzy())
+        assertEquals(50, Yatzy(6, 6, 6, 6, 6).yatzy())
     }
 
     @Test
