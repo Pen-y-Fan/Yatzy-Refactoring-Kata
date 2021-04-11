@@ -94,15 +94,11 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         }
 
         fun scorePair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val counts = IntArray(6)
-            counts[d1 - 1]++
-            counts[d2 - 1]++
-            counts[d3 - 1]++
-            counts[d4 - 1]++
-            counts[d5 - 1]++
+            val tallies = tallies(d1, d2, d3, d4, d5)
+
             var at = 0
             while (at != 6) {
-                if (counts[6 - at - 1] >= 2)
+                if (tallies[6 - at - 1] >= 2)
                     return (6 - at) * 2
                 at++
             }
@@ -110,17 +106,13 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         }
 
         fun twoPair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val counts = IntArray(6)
-            counts[d1 - 1]++
-            counts[d2 - 1]++
-            counts[d3 - 1]++
-            counts[d4 - 1]++
-            counts[d5 - 1]++
+            val tallies = tallies(d1, d2, d3, d4, d5)
+
             var n = 0
             var score = 0
             var i = 0
             while (i < 6) {
-                if (counts[6 - i - 1] >= 2) {
+                if (tallies[6 - i - 1] >= 2) {
                     n++
                     score += 6 - i
                 }
@@ -133,12 +125,8 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         }
 
         fun fourOfAKind(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies = IntArray(6)
-            tallies[d1 - 1]++
-            tallies[d2 - 1]++
-            tallies[d3 - 1]++
-            tallies[d4 - 1]++
-            tallies[d5 - 1]++
+            val tallies = tallies(d1, d2, d3, d4, d5)
+
             for (i in 0..5)
                 if (tallies[i] >= 4)
                     return (i + 1) * 4
@@ -146,25 +134,17 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         }
 
         fun threeOfAKind(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val t = IntArray(6)
-            t[d1 - 1]++
-            t[d2 - 1]++
-            t[d3 - 1]++
-            t[d4 - 1]++
-            t[d5 - 1]++
+            val tallies = tallies(d1, d2, d3, d4, d5)
+
             for (i in 0..5)
-                if (t[i] >= 3)
+                if (tallies[i] >= 3)
                     return (i + 1) * 3
             return 0
         }
 
         fun smallStraight(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies = IntArray(6)
-            tallies[d1 - 1] += 1
-            tallies[d2 - 1] += 1
-            tallies[d3 - 1] += 1
-            tallies[d4 - 1] += 1
-            tallies[d5 - 1] += 1
+            val tallies = tallies(d1, d2, d3, d4, d5)
+
             return if (tallies[0] == 1 &&
                 tallies[1] == 1 &&
                 tallies[2] == 1 &&
@@ -174,12 +154,8 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         }
 
         fun largeStraight(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies = IntArray(6)
-            tallies[d1 - 1] += 1
-            tallies[d2 - 1] += 1
-            tallies[d3 - 1] += 1
-            tallies[d4 - 1] += 1
-            tallies[d5 - 1] += 1
+            val tallies = tallies(d1, d2, d3, d4, d5)
+
             return if (tallies[1] == 1 &&
                 tallies[2] == 1 &&
                 tallies[3] == 1 &&
@@ -195,12 +171,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
             var foundThreePair = false
             var threePairFoundAt = 0
 
-            val tallies = IntArray(6)
-            tallies[d1 - 1] += 1
-            tallies[d2 - 1] += 1
-            tallies[d3 - 1] += 1
-            tallies[d4 - 1] += 1
-            tallies[d5 - 1] += 1
+            val tallies = tallies(d1, d2, d3, d4, d5)
 
             while (i != 6) {
                 if (tallies[i] == 2) {
@@ -223,6 +194,16 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
                 twoPairFoundAt * 2 + threePairFoundAt * 3
             else
                 0
+        }
+
+        private fun tallies(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): IntArray {
+            val tallies = IntArray(6)
+            tallies[d1 - 1] += 1
+            tallies[d2 - 1] += 1
+            tallies[d3 - 1] += 1
+            tallies[d4 - 1] += 1
+            tallies[d5 - 1] += 1
+            return tallies
         }
     }
 }
