@@ -100,21 +100,21 @@ class YatzyTest {
 
     @Test
     fun small_straight() {
-        assertEquals(15, Yatzy.smallStraight(1, 2, 3, 4, 5))
-        assertEquals(15, Yatzy.smallStraight(2, 3, 4, 5, 1))
-        assertEquals(0, Yatzy.smallStraight(1, 2, 2, 4, 5))
+        assertEquals(0, Yatzy(1, 2, 2, 4, 5).smallStraight())
+        assertEquals(15, Yatzy(1, 2, 3, 4, 5).smallStraight())
+        assertEquals(15, Yatzy(2, 3, 4, 5, 1).smallStraight())
     }
 
     @Test
     fun large_straight() {
+        assertEquals(0, Yatzy.largeStraight(1, 2, 2, 4, 5))
         assertEquals(20, Yatzy.largeStraight(6, 2, 3, 4, 5))
         assertEquals(20, Yatzy.largeStraight(2, 3, 4, 5, 6))
-        assertEquals(0, Yatzy.largeStraight(1, 2, 2, 4, 5))
     }
 
     @Test
     fun full_house() {
-        assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6))
         assertEquals(0, Yatzy.fullHouse(2, 3, 4, 5, 6))
+        assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6))
     }
 }

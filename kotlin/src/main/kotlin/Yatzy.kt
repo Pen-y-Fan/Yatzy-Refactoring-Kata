@@ -74,18 +74,24 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         return findOfAKind(4)
     }
 
-    companion object {
-
-        fun smallStraight(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies = tallies(d1, d2, d3, d4, d5)
-
-            return if (tallies[0] == 1 &&
-                tallies[1] == 1 &&
-                tallies[2] == 1 &&
-                tallies[3] == 1 &&
-                tallies[4] == 1
-            ) 15 else 0
+    private fun findOfAKind(kindCount: Int): Int {
+        for ((index, count) in this.tallies.withIndex()) {
+            if (count >= kindCount) return (index + 1) * kindCount
         }
+        return 0
+    }
+
+    fun smallStraight(): Int {
+        for (i in 0..4) {
+            if (tallies[i] != 1) {
+                return 0
+            }
+        }
+        return 15
+    }
+
+
+    companion object {
 
         fun largeStraight(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
             val tallies = tallies(d1, d2, d3, d4, d5)
@@ -139,13 +145,6 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
             tallies[d5 - 1] += 1
             return tallies
         }
-    }
-
-    private fun findOfAKind(kindCount: Int): Int {
-        for ((index, count) in this.tallies.withIndex()) {
-            if (count >= kindCount) return (index + 1) * kindCount
-        }
-        return 0
     }
 }
 
