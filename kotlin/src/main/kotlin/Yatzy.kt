@@ -1,42 +1,27 @@
 class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
 
     private var dice: IntArray = IntArray(5)
+    private var tallies: IntArray = IntArray(6)
 
     init {
-        dice[0] = d1
-        dice[1] = d2
-        dice[2] = d3
-        dice[3] = d4
-        dice[4] = d5
+        this.dice[0] = d1
+        this.dice[1] = d2
+        this.dice[2] = d3
+        this.dice[3] = d4
+        this.dice[4] = d5
+        this.tallies = tallies(d1, d2, d3, d4, d5)
     }
 
     fun fours(): Int {
-        var sum = 0
-        for (at in 0..4) {
-            if (dice[at] == 4) {
-                sum += 4
-            }
-        }
-        return sum
+        return this.tallies[3] * 4
     }
 
     fun fives(): Int {
-        var s = 0
-        var i = 0
-        while (i < dice.size) {
-            if (dice[i] == 5)
-                s += 5
-            i++
-        }
-        return s
+        return this.tallies[4] * 5
     }
 
     fun sixes(): Int {
-        var sum = 0
-        for (at in dice.indices)
-            if (dice[at] == 6)
-                sum += 6
-        return sum
+        return this.tallies[5] * 6
     }
 
     companion object {
