@@ -12,6 +12,19 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         this.tallies = tallies(d1, d2, d3, d4, d5)
     }
 
+
+    fun ones(): Int {
+        return this.tallies[0]
+    }
+
+    fun twos(): Int {
+        return this.tallies[1] * 2
+    }
+
+    fun threes(): Int {
+        return this.tallies[2] * 3
+    }
+
     fun fours(): Int {
         return this.tallies[3] * 4
     }
@@ -44,38 +57,6 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
                 if (counts[i] == 5)
                     return 50
             return 0
-        }
-
-        fun ones(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            var sum = 0
-            if (d1 == 1) sum++
-            if (d2 == 1) sum++
-            if (d3 == 1) sum++
-            if (d4 == 1) sum++
-            if (d5 == 1)
-                sum++
-
-            return sum
-        }
-
-        fun twos(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            var sum = 0
-            if (d1 == 2) sum += 2
-            if (d2 == 2) sum += 2
-            if (d3 == 2) sum += 2
-            if (d4 == 2) sum += 2
-            if (d5 == 2) sum += 2
-            return sum
-        }
-
-        fun threes(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            var s = 0
-            if (d1 == 3) s += 3
-            if (d2 == 3) s += 3
-            if (d3 == 3) s += 3
-            if (d4 == 3) s += 3
-            if (d5 == 3) s += 3
-            return s
         }
 
         fun scorePair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
