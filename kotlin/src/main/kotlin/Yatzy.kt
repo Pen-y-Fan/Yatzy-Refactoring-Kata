@@ -53,26 +53,20 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         return 0
     }
 
-    companion object {
-
-        fun twoPair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies = tallies(d1, d2, d3, d4, d5)
-
-            var n = 0
-            var score = 0
-            var i = 0
-            while (i < 6) {
-                if (tallies[6 - i - 1] >= 2) {
-                    n++
-                    score += 6 - i
-                }
-                i += 1
+    fun twoPair(): Int {
+        var n = 0
+        var score = 0
+        for ((index, count) in this.tallies.withIndex()) {
+            if (count >= 2) {
+                score += index + 1
+                n++
             }
-            return if (n == 2)
-                score * 2
-            else
-                0
         }
+        return if (n != 2) 0
+            else score * 2
+    }
+
+    companion object {
 
         fun fourOfAKind(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
             val tallies = tallies(d1, d2, d3, d4, d5)
