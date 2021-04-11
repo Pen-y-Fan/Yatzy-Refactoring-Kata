@@ -66,6 +66,13 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
             else score * 2
     }
 
+    fun threeOfAKind(): Int {
+        for ((index, count) in this.tallies.withIndex()) {
+            if (count >= 3) return (index + 1) * 3
+        }
+        return 0
+    }
+
     companion object {
 
         fun fourOfAKind(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
@@ -74,15 +81,6 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
             for (i in 0..5)
                 if (tallies[i] >= 4)
                     return (i + 1) * 4
-            return 0
-        }
-
-        fun threeOfAKind(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies = tallies(d1, d2, d3, d4, d5)
-
-            for (i in 0..5)
-                if (tallies[i] >= 3)
-                    return (i + 1) * 3
             return 0
         }
 
