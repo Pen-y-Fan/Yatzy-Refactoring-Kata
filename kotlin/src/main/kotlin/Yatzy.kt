@@ -63,7 +63,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
             }
         }
         return if (n != 2) 0
-            else score * 2
+        else score * 2
     }
 
     fun threeOfAKind(): Int {
@@ -82,12 +82,12 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
     }
 
     fun smallStraight(): Int {
-        return if(!isStraight(0..4)) 0
+        return if (!isStraight(0..4)) 0
         else 15
     }
 
     fun largeStraight(): Int {
-        return if(!isStraight(1..5)) 0
+        return if (!isStraight(1..5)) 0
         else 20
     }
 
@@ -98,39 +98,12 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         return true
     }
 
+    fun fullHouse(): Int {
+        if (!tallies.contains(2) || !tallies.contains(3)) return 0
+        return (tallies.indexOf(2) +1) * 2 + (tallies.indexOf(3) +1) * 3
+    }
+
     companion object {
-
-        fun fullHouse(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            var i = 0
-            var foundTwoPair = false
-            var twoPairFoundAt = 0
-            var foundThreePair = false
-            var threePairFoundAt = 0
-
-            val tallies = tallies(d1, d2, d3, d4, d5)
-
-            while (i != 6) {
-                if (tallies[i] == 2) {
-                    foundTwoPair = true
-                    twoPairFoundAt = i + 1
-                }
-                i += 1
-            }
-
-            i = 0
-            while (i != 6) {
-                if (tallies[i] == 3) {
-                    foundThreePair = true
-                    threePairFoundAt = i + 1
-                }
-                i += 1
-            }
-
-            return if (foundTwoPair && foundThreePair)
-                twoPairFoundAt * 2 + threePairFoundAt * 3
-            else
-                0
-        }
 
         private fun tallies(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): IntArray {
             val tallies = IntArray(6)

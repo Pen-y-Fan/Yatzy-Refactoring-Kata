@@ -114,7 +114,7 @@ class YatzyTest {
 
     @Test
     fun full_house() {
-        assertEquals(0, Yatzy.fullHouse(2, 3, 4, 5, 6))
-        assertEquals(18, Yatzy.fullHouse(6, 2, 2, 2, 6))
+        assertEquals(0, Yatzy(2, 3, 4, 5, 6).fullHouse())
+        assertEquals(18, Yatzy(6, 2, 2, 2, 6).fullHouse())
     }
 }
