@@ -5,10 +5,10 @@ class YatzyTest {
 
     @Test
     fun chance_scores_sum_of_all_dice() {
-        val expected = 15
-        val actual = Yatzy.chance(2, 3, 4, 5, 1)
-        assertEquals(expected, actual)
-        assertEquals(16, Yatzy.chance(3, 3, 4, 5, 1))
+        assertEquals(5, Yatzy(1, 1, 1, 1, 1).chance())
+        assertEquals(15, Yatzy(2, 3, 4, 5, 1).chance())
+        assertEquals(16, Yatzy(3, 3, 4, 5, 1).chance())
+        assertEquals(25, Yatzy(5, 5, 5, 5, 5).chance())
     }
 
     @Test

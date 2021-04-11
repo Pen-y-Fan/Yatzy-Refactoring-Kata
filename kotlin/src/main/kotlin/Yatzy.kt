@@ -37,17 +37,11 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         return this.tallies[5] * 6
     }
 
-    companion object {
+    fun chance(): Int {
+        return this.dice.sum()
+    }
 
-        fun chance(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            var total = 0
-            total += d1
-            total += d2
-            total += d3
-            total += d4
-            total += d5
-            return total
-        }
+    companion object {
 
         fun yatzy(vararg dice: Int): Int {
             val counts = IntArray(6)
