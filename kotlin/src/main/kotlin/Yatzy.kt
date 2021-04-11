@@ -1,7 +1,7 @@
 class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
 
     private var dice: IntArray = IntArray(5)
-    private var tallies: IntArray = IntArray(6)
+    private var counts: IntArray = IntArray(6)
 
     init {
         this.dice[0] = d1
@@ -9,32 +9,32 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
         this.dice[2] = d3
         this.dice[3] = d4
         this.dice[4] = d5
-        this.tallies = tallies(d1, d2, d3, d4, d5)
+        for (die in this.dice) this.counts[die - 1]++
     }
 
 
     fun ones(): Int {
-        return this.tallies[0]
+        return this.counts[0]
     }
 
     fun twos(): Int {
-        return this.tallies[1] * 2
+        return this.counts[1] * 2
     }
 
     fun threes(): Int {
-        return this.tallies[2] * 3
+        return this.counts[2] * 3
     }
 
     fun fours(): Int {
-        return this.tallies[3] * 4
+        return this.counts[3] * 4
     }
 
     fun fives(): Int {
-        return this.tallies[4] * 5
+        return this.counts[4] * 5
     }
 
     fun sixes(): Int {
-        return this.tallies[5] * 6
+        return this.counts[5] * 6
     }
 
     fun chance(): Int {
@@ -42,12 +42,12 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
     }
 
     fun yatzy(): Int {
-        if (!this.tallies.contains(5)) return 0
+        if (!this.counts.contains(5)) return 0
         return 50
     }
 
     fun scorePair(): Int {
-        for ((index, count) in this.tallies.reversedArray().withIndex()) {
+        for ((index, count) in this.counts.reversedArray().withIndex()) {
             if (count >= 2) return (6 - index) * 2
         }
         return 0
@@ -56,7 +56,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
     fun twoPair(): Int {
         var n = 0
         var score = 0
-        for ((index, count) in this.tallies.withIndex()) {
+        for ((index, count) in this.counts.withIndex()) {
             if (count >= 2) {
                 score += index + 1
                 n++
@@ -75,7 +75,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
     }
 
     private fun findOfAKind(kindCount: Int): Int {
-        for ((index, count) in this.tallies.withIndex()) {
+        for ((index, count) in this.counts.withIndex()) {
             if (count >= kindCount) return (index + 1) * kindCount
         }
         return 0
@@ -93,27 +93,14 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
 
     private fun isStraight(range: IntRange): Boolean {
         for (i in range) {
-            if (tallies[i] != 1) return false
+            if (counts[i] != 1) return false
         }
         return true
     }
 
     fun fullHouse(): Int {
-        if (!tallies.contains(2) || !tallies.contains(3)) return 0
-        return (tallies.indexOf(2) +1) * 2 + (tallies.indexOf(3) +1) * 3
-    }
-
-    companion object {
-
-        private fun tallies(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): IntArray {
-            val tallies = IntArray(6)
-            tallies[d1 - 1] += 1
-            tallies[d2 - 1] += 1
-            tallies[d3 - 1] += 1
-            tallies[d4 - 1] += 1
-            tallies[d5 - 1] += 1
-            return tallies
-        }
+        if (!counts.contains(2) || !counts.contains(3)) return 0
+        return (counts.indexOf(2) + 1) * 2 + (counts.indexOf(3) + 1) * 3
     }
 }
 
