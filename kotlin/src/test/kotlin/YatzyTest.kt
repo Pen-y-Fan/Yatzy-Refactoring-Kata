@@ -107,9 +107,9 @@ class YatzyTest {
 
     @Test
     fun large_straight() {
-        assertEquals(0, Yatzy.largeStraight(1, 2, 2, 4, 5))
-        assertEquals(20, Yatzy.largeStraight(6, 2, 3, 4, 5))
-        assertEquals(20, Yatzy.largeStraight(2, 3, 4, 5, 6))
+        assertEquals(0, Yatzy(1, 2, 2, 4, 5).largeStraight())
+        assertEquals(20, Yatzy(6, 2, 3, 4, 5).largeStraight())
+        assertEquals(20, Yatzy(2, 3, 4, 5, 6).largeStraight())
     }
 
     @Test

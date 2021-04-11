@@ -82,27 +82,23 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
     }
 
     fun smallStraight(): Int {
-        for (i in 0..4) {
-            if (tallies[i] != 1) {
-                return 0
-            }
-        }
-        return 15
+        return if(!isStraight(0..4)) 0
+        else 15
     }
 
+    fun largeStraight(): Int {
+        return if(!isStraight(1..5)) 0
+        else 20
+    }
+
+    private fun isStraight(range: IntRange): Boolean {
+        for (i in range) {
+            if (tallies[i] != 1) return false
+        }
+        return true
+    }
 
     companion object {
-
-        fun largeStraight(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies = tallies(d1, d2, d3, d4, d5)
-
-            return if (tallies[1] == 1 &&
-                tallies[2] == 1 &&
-                tallies[3] == 1 &&
-                tallies[4] == 1
-                && tallies[5] == 1
-            ) 20 else 0
-        }
 
         fun fullHouse(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
             var i = 0
