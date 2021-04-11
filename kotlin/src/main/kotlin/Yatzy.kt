@@ -1,5 +1,5 @@
 class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
-// vararg dice: Int
+
     private var dice: IntArray = IntArray(5)
     private var tallies: IntArray = IntArray(6)
 
@@ -42,26 +42,18 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
     }
 
     fun yatzy(): Int {
-        if (!this.tallies.contains(5)) {
-            return 0
-        }
+        if (!this.tallies.contains(5)) return 0
         return 50
     }
 
-    companion object {
-
-
-        fun scorePair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies = tallies(d1, d2, d3, d4, d5)
-
-            var at = 0
-            while (at != 6) {
-                if (tallies[6 - at - 1] >= 2)
-                    return (6 - at) * 2
-                at++
-            }
-            return 0
+    fun scorePair(): Int {
+        for ((index, count) in this.tallies.reversedArray().withIndex()) {
+            if (count >= 2) return (6 - index) * 2
         }
+        return 0
+    }
+
+    companion object {
 
         fun twoPair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
             val tallies = tallies(d1, d2, d3, d4, d5)
