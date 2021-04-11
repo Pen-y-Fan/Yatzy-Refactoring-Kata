@@ -1,1 +1,8 @@
 .vs
+/.idea/
+/kotlin/build/
+/kotlin/.gradle/
+
+# Compiled class file
+*.class
+out/
