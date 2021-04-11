@@ -93,9 +93,9 @@ class YatzyTest {
 
     @Test
     fun four_of_a_knd() {
-        assertEquals(0, Yatzy.fourOfAKind(3, 3, 3, 5, 5))
-        assertEquals(12, Yatzy.fourOfAKind(3, 3, 3, 3, 5))
-        assertEquals(20, Yatzy.fourOfAKind(5, 5, 5, 4, 5))
+        assertEquals(0, Yatzy(3, 3, 3, 5, 5).fourOfAKind())
+        assertEquals(12, Yatzy(3, 3, 3, 3, 5).fourOfAKind())
+        assertEquals(20, Yatzy(5, 5, 5, 4, 5).fourOfAKind())
     }
 
     @Test
