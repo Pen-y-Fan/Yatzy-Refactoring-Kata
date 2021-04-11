@@ -1,17 +1,17 @@
-class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
+class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int) {
 
-    protected var dice: IntArray = IntArray(5)
+    private var dice: IntArray = IntArray(5)
 
     init {
         dice[0] = d1
         dice[1] = d2
         dice[2] = d3
         dice[3] = d4
-        dice[4] = _5
+        dice[4] = d5
     }
 
     fun fours(): Int {
-        var sum: Int = 0
+        var sum = 0
         for (at in 0..4) {
             if (dice[at] == 4) {
                 sum += 4
@@ -22,10 +22,10 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
 
     fun fives(): Int {
         var s = 0
-        var i: Int = 0
+        var i = 0
         while (i < dice.size) {
             if (dice[i] == 5)
-                s = s + 5
+                s += 5
             i++
         }
         return s
@@ -35,7 +35,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
         var sum = 0
         for (at in dice.indices)
             if (dice[at] == 6)
-                sum = sum + 6
+                sum += 6
         return sum
     }
 
@@ -84,7 +84,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
         }
 
         fun threes(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            var s: Int = 0
+            var s = 0
             if (d1 == 3) s += 3
             if (d2 == 3) s += 3
             if (d3 == 3) s += 3
@@ -93,15 +93,14 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
             return s
         }
 
-        fun score_pair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
+        fun scorePair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
             val counts = IntArray(6)
             counts[d1 - 1]++
             counts[d2 - 1]++
             counts[d3 - 1]++
             counts[d4 - 1]++
             counts[d5 - 1]++
-            var at: Int
-            at = 0
+            var at = 0
             while (at != 6) {
                 if (counts[6 - at - 1] >= 2)
                     return (6 - at) * 2
@@ -110,7 +109,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
             return 0
         }
 
-        fun two_pair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
+        fun twoPair(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
             val counts = IntArray(6)
             counts[d1 - 1]++
             counts[d2 - 1]++
@@ -133,10 +132,10 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
                 0
         }
 
-        fun four_of_a_kind(_1: Int, _2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies: IntArray = IntArray(6)
-            tallies[_1 - 1]++
-            tallies[_2 - 1]++
+        fun fourOfAKind(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
+            val tallies = IntArray(6)
+            tallies[d1 - 1]++
+            tallies[d2 - 1]++
             tallies[d3 - 1]++
             tallies[d4 - 1]++
             tallies[d5 - 1]++
@@ -146,8 +145,8 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
             return 0
         }
 
-        fun three_of_a_kind(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val t: IntArray = IntArray(6)
+        fun threeOfAKind(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
+            val t = IntArray(6)
             t[d1 - 1]++
             t[d2 - 1]++
             t[d3 - 1]++
@@ -160,7 +159,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
         }
 
         fun smallStraight(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies: IntArray = IntArray(6)
+            val tallies = IntArray(6)
             tallies[d1 - 1] += 1
             tallies[d2 - 1] += 1
             tallies[d3 - 1] += 1
@@ -175,7 +174,7 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
         }
 
         fun largeStraight(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies: IntArray = IntArray(6)
+            val tallies = IntArray(6)
             tallies[d1 - 1] += 1
             tallies[d2 - 1] += 1
             tallies[d3 - 1] += 1
@@ -190,25 +189,23 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
         }
 
         fun fullHouse(d1: Int, d2: Int, d3: Int, d4: Int, d5: Int): Int {
-            val tallies: IntArray
-            var _2 = false
-            var i: Int
-            var _2_at = 0
-            var _3 = false
-            var _3_at = 0
+            var i = 0
+            var foundTwoPair = false
+            var twoPairFoundAt = 0
+            var foundThreePair = false
+            var threePairFoundAt = 0
 
-            tallies = IntArray(6)
+            val tallies = IntArray(6)
             tallies[d1 - 1] += 1
             tallies[d2 - 1] += 1
             tallies[d3 - 1] += 1
             tallies[d4 - 1] += 1
             tallies[d5 - 1] += 1
 
-            i = 0
             while (i != 6) {
                 if (tallies[i] == 2) {
-                    _2 = true
-                    _2_at = i + 1
+                    foundTwoPair = true
+                    twoPairFoundAt = i + 1
                 }
                 i += 1
             }
@@ -216,14 +213,14 @@ class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
             i = 0
             while (i != 6) {
                 if (tallies[i] == 3) {
-                    _3 = true
-                    _3_at = i + 1
+                    foundThreePair = true
+                    threePairFoundAt = i + 1
                 }
                 i += 1
             }
 
-            return if (_2 && _3)
-                _2_at * 2 + _3_at * 3
+            return if (foundTwoPair && foundThreePair)
+                twoPairFoundAt * 2 + threePairFoundAt * 3
             else
                 0
         }
