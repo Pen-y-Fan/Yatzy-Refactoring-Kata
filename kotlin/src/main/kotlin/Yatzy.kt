@@ -1,4 +1,3 @@
-
 class Yatzy(d1: Int, d2: Int, d3: Int, d4: Int, _5: Int) {
 
     protected var dice: IntArray = IntArray(5)
